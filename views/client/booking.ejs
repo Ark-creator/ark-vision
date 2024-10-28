@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <link rel="stylesheet" href="/css/output.css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="/assets/img/arklogo.png">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/aed89df169.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Island+Moments&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Ark Vision</title>
+</head>
+<style>
+    *{
+        font-family: 'Poppins';
+    }
+    html, body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; 
+        height: 100%; 
+    }
+    header{
+        background-color: #F6DE03;
+    }
+    body{
+        background-color: #121212;
+    }
+    header button{
+        border: 1px solid black;
+    }
+    .island{
+        font-family: 'Island Moments', cursive;
+    }
+    .pricingcard:hover {
+    color: black;
+    }
+    input[type="radio"] {
+        accent-color: #F6DE03;
+        width: 20px;
+        border: 1px solid #F6DE03;
+    }
+    input[type="checkbox"] {
+        accent-color: black;
+        width: 20px;
+    }
+    /* input[type="date"] {
+        width: 250px;
+        background-color: transparent;
+        box-shadow: 0 0 5px #f6de038d;
+        padding: 5px;
+        border-radius: 10px;
+        color: #ffffff;
+    } */
+    * {
+    font-family: 'Poppins';
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+header {
+    background-color: #F6DE03;
+}
+
+body {
+    background-color: #121212;
+}
+
+header button {
+    border: 1px solid black;
+}
+
+.island {
+    font-family: 'Island Moments', cursive;
+}
+
+.pricingcard:hover {
+    color: black;
+}
+
+input[type="radio"] {
+    accent-color: #F6DE03;
+    width: 20px;
+    border: 1px solid #F6DE03;
+}
+
+input[type="checkbox"] {
+    accent-color: black;
+    width: 20px;
+}
+
+/* input[type="date"] {
+    width: 250px;
+    background-color: transparent;
+    box-shadow: 0 0 5px #f6de038d;
+    padding: 5px;
+    border-radius: 10px;
+    color: #ffffff;
+} */
+
+.modal {
+    display: flex;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.748);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    /* transform: translateY(-200px); 
+    opacity: 0;  */
+    transition: all 0.4s ease;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+
+</style>
+<body class="overflow-x-hidden flex flex-col"> 
+
+    <!-- Navigation Bar -->
+<nav class="text-white flex justify-between px-[10%] items-center fixed top-[0px] left-0 right-0 z-30 p-4 bg-[#121212] border-b-2 border-yellow-400">
+    <div class="logo">
+        <%- include('../components/logo') %>
+    </div>
+
+
+    <ul class="hidden lg:flex gap-14 uppercase">
+        <li><a class="hover:text-[#F6DE03]" href="/ark/client/">Home</a></li>
+        <li><a class="hover:text-[#F6DE03]" href="/ark/client/#services">Gallery</a></li>
+        <li><a class="hover:text-[#F6DE03]" href="/ark/client/booking">Booking</a></li>
+        <li><a class="hover:text-[#F6DE03]" href="/ark/client/#about">About</a></li>
+    </ul>
+
+        <div class="hidden lg:flex gap-5 items-center">
+            <a class="w-fit px-2 py-2 text-center text-black rounded-[20px] bg-[#F6DE03] font-bold transition-colors duration-300 hover:bg-gray-700 hover:text-[#F6DE03]"
+            href="/ark/client/profile">
+                <% try{ %>
+                    <%= name %>
+                <% }catch{} %>
+                <i class="fa-solid fa-circle-user fa-2xl"></i>
+            </a>
+        </div>
+
+        <div class="lg:hidden block">
+            <button id="hamburger" class="text-white focus:outline-none">
+                <!-- Simple icon using font-awesome or an SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+
+        <div id="menu" class="hidden absolute top-[70.1px] bg-[#121212]/90 w-full right-0 p-10 pl-[50px]"
+            style="box-shadow: 0px 5px 5px #f6de0336;">
+            <ul class=" flex flex-col gap-2 uppercase -mt-[20px]">
+                <li><a class="hover:text-[#F6DE03]" href="/ark/client#home">Home</a></li>
+                <li><a class="hover:text-[#F6DE03]" href="/ark/client#services">Services</a></li>
+                <li><a class="hover:text-[#F6DE03]" href="#pricing">Booking</a></li>
+                <li><a class="hover:text-[#F6DE03]" href="/ark/client#about">About</a></li>
+            </ul>
+
+            <div class="flex gap-5 items-center mt-3">
+                <a class="w-fit px-2 py-2 text-center text-black rounded-[20px] bg-[#F6DE03] font-bold"
+                    href="/ark/client/profile">
+
+                    <% try{ %>
+                        <%= name %>
+                    <% }catch{} %>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- End of Navigation Bar -->
+
+    <h1 class="text-[#F6DE03] text-center text-[60px] mt-[120px]">Services</h1>
+    
+    <form action="/ark/client/booking" method="post" class="flex flex-col justify-center gap-32 mt-10 px-[15%] relative">
+        <input type="hidden" value="<%= id %>" name="id">
+        <input type="hidden" id="total" name="total">
+        <% services.map(service => { %>
+            <p class=" text-center text-white text-[40px]"> <%= service.name %> </p>
+            
+            <div class="grid grid-cols-1 justify-center gap-10 md:grid-cols-2 lg:grid-cols-3"> <!-- the grid itself -->
+                <% groups.map(group => { %>
+                    <% if(group._id.serviceName === service.name){ %>
+                        <div class="min-w-[330px] flex flex-col gap-1 px-3 py-5 rounded-[20px] items-center hover:scale-110 transition-transform duration-300" style="box-shadow:0 0 5px #f6de038d">
+                            <% 
+                                let locked; 
+                            %>                
+                            <% group.packages.map(package => { %>
+                                <% if(!locked){ %>
+                                    <h1 class="text-[#F6DE03] text-[48px] -mt-5 uppercase font-bold"> <%= package.name %> </h1>
+                                <% } locked = true; %>
+                                <div class="flex gap-2">
+                                    <input required type="radio" name="service" id="<%= package.price %>" value="₱<%= package.price %> / <%= package.name %>-<%= package.duration %> / <%= service.name %>">
+                                    <h1 class="text-[#F6DE03] text-[30px] font-bold ">₱<%= package.price %> - <%= package.duration %> MINS</h1>
+                                </div>
+                                <p class="text-[#ececec] text-[15px]"> <%= package.description %> </p>
+                            <% }) %> <!-- endPackageMap -->
+                        </div> <!-- endPackageDiv -->
+                    <% } %> <!-- endIf -->
+                <% }) %> <!-- endGroupsMap -->
+            </div> <!-- endGrid -->
+        <% }) %> <!-- endServicesMap -->
+
+        <hr class="border-[1px] border-[#F6DE03] mt-5">
+
+        <!-- Add On & Time -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 gap-5 justify-around">
+            <div class="flex flex-col">
+                <div class="flex flex-col gap-5">
+                    <h1 class="text-[#F6DE03] text-[20px] uppercase font-regular">All Packages Include</h1>
+                    <ul class="list-disc ml-4 text-white">
+                        <li>Free usage of assorted props</li>
+                        <li>Outfit Change</li>
+                        <li>Unlimited Shots</li>
+                        <li>Unli background Change</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-transparent">edwuhcjbknelowipehuknjmk;eofisd9cuyhekjnmlrfodcsi9xu8yighjbnredfkuoh <br>3edqsouhjb nmwqdsiaxoujhkwndsaxljiuhiwdbjsnxjluh</div>
+            <!-- Additional -->
+            <div class="flex flex-col w-[330px]">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-[#F6DE03] text-[20px] font-regular">Additional</h1>
+                    <button  type="button"
+                    id="selectAllBtn"
+                     class="text-[#F6DE03] text-[10px] px-2 py-1 border-[1px] border-[#F6DE03] rounded-[10px] font-regular"
+                    onmousedown="superChecker();"
+                    >
+                    Select All
+                </button>
+                </div>
+
+                <div class="flex flex-col bg-[#F6DE03] gap-4 py-4 px-4 rounded-[20px] mt-2">
+                    <% addOns.map(hamburger => { %>
+                        <div class="flex justify-between items-center">
+                            <div class="flex gap-2">
+                                <input value="<%= `${hamburger.price} - ${hamburger.description}` %>" data-previous-state="0" name="addon[]" type="checkbox" class="option-checkbox">
+                                <label for="addon" class="text-[12px]"> <%= hamburger.description %> </label>
+                            </div>
+                            <p class="text-[12px]" id="addon-price" >
+                                + ₱<%= hamburger.price %>
+                            </p>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+            <!-- End of Additional -->
+        </div>
+
+        <div class="flex justify-between items-center flex-col md:flex-row fixed bottom-0 left-0 w-full py-4 px-10 bg-[#121212] border-t-2 border-[#F6DE03]"> <!-- FIXED BOTTOM NAV -->
+            <button onmousedown="superResetter();" type="reset" class="flex items-center gap-2 border-b-[2px] border-[#F6DE03] h-fit w-fit text-[#F6DE03] font-semibold">CLEAR ALL<i class="fa-regular fa-trash-can"></i></button>
+
+            <% 
+                let collection = [];
+                bookings.map(booking => {
+                    collection.push({date: String(booking.date), time: String(booking.time)})
+                }) 
+            %>                
+
+            <!-- Time -->
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <label for="date" class="text-[#F6DE03] text-[20px]">Date:</label>
+                    <input required name="date" type="date" class="bg-transparent h-[35px] rounded-[10px] px-2  text-white w-[250px] border-2 border-yellow-500" >
+                </div>
+                
+                <div class="flex items-center gap-2">
+                    <label for="time" class="text-[#F6DE03] text-[20px]">Time</label>
+
+                    <select required name="time" id="time" class="bg-transparent h-[35px] rounded-[10px] px-2  text-white w-[250px] border-2 border-yellow-500" >
+                        <option selected disabled value="Select Time" class="bg-[#121212] text-white">Select Time</option>
+                        <option id="options" value="8:00 AM to 9:00 AM" class="bg-[#121212] text-white">8:00 AM - 9:00 AM</option>
+                        <option id="options" value="9:00 AM to 10:00 AM" class="bg-[#121212] text-white">9:00 AM - 10:00 AM</option>
+                        <option id="options" value="10:00 AM to 11:00 AM" class="bg-[#121212] text-white">10:00 AM - 11:00 AM</option>
+                        <option id="options" value="11:00 AM to 12:00 AM" class="bg-[#121212] text-white">11:00 AM - 12:00 AM</option>
+                        <option id="options" value="1:00 PM to 2:00 PM" class="bg-[#121212] text-white">1:00 PM - 2:00 PM</option>
+                        <option id="options" value="2:00 PM to 3:00 PM" class="bg-[#121212] text-white">2:00 PM - 3:00 PM</option>
+                        <option id="options" value="3:00 PM to 4:00 PM" class="bg-[#121212] text-white">3:00 PM - 4:00 PM</option>
+                    </select>                    
+                </div>
+            </div>
+            <!-- End of Time -->
+
+            <div class="flex flex-col md:flex-row gap-5">
+                <p class="font-semibold text-[#F6DE03] flex items-center">Total Price: <span class="pl-2" id="totalPrice" >₱ 0,000.00</span></p>
+                <div class="flex gap-2">
+                    <button type="submit" id="bookNowBtn" class="bg-[#F6DE03] text-[#121212] px-5 py-1 font-semibold rounded-[10px] hover:bg-transparent hover:text-[#F6DE03] hover:border-[1px] hover:border-[#F6DE03] transition duration-200 ease-out hover:ease-in" >Book Now</button>
+                    <!-- <button class="bg-transparent text-[#F6DE03] border-[1px] border-[#F6DE03] px-3 py-1 font-semibold rounded-[10px] hover:bg-[#F6DE03] hover:text-[#121212] transition duration-200 ease-out hover:ease-in" id="submitReceiptBtn">Submit Receipt</button> -->
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+        
+        <% try{ if(message === "Booking Successful") { %>
+        <!-- Gcash Modal -->
+        <div id="myModal" class="modal">
+            <div class="modal-content bg-[#f6de03] w-[650px] h-[430px] relative flex items-center px-5 py-8 justify-center gap-5">
+                <!-- <span class="close absolute -top-[20px] -right-[20px] text-3xl font-semibold cursor-pointer hover:text-red-500 text-[#F6DE03]">&times;</span> -->
+                <img src="/assets/img/image 9.png" class="h-[380px]">
+                
+                <div class="w-[330px] flex flex-col items-center self-end">
+                    <div class="h-[250px] w-[250px] bg-black rounded-lg">
+                        <div id="imagePreviewContainerClient<%= id %>" class="image-preview-container flex justify-center"></div>
+                    </div>
+
+                    <form class="flex flex-col w-[220px] items-center mt-5" action="/ark/client/booking/upload" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="clientId" value="<%= id %>" />
+
+                        <label for="uploadImageClient<%= id %>" class="text-black whitespace-nowrap font-bold">Upload Receipt:</label>
+                        <input type="file" name="image" accept="image/*" id="uploadImageClient<%= id %>" class="block mb-2 border border-black rounded-md w-full" required>
+                        <button type="submit" class="bg-black text-[#F6DE03] px-4 py-2 rounded-md w-full">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <% }} catch{} %>
+        <!-- End of Gcash Modal -->
+
+    </div>
+    <!-- End of Receipt Modal -->
+
+
+    <%- include('../components/client-footer') %>
+
+</body>
+</html>
+
+<script src="/js/booking(pesco).js" ></script>
+<script src="/js/booking(sigrae).js"></script>
+
+<script>
+    function superResetter() {
+    currentTotal = "0";
+    previousChosen = 0;
+    formTotal.value = "₱ 0,000.00";
+    totalPrice.innerHTML = "₱ 0,000.00";
+    checkboxess.forEach(box => {
+        box.setAttribute("data-previous-state", '0');
+    });
+}
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const fileInput = document.getElementById("uploadImageClient<%= id %>");
+      const previewContainer = document.getElementById("imagePreviewContainerClient<%= id %>");
+
+      fileInput.addEventListener("change", function () {
+        const files = fileInput.files;
+        previewContainer.innerHTML = ""; 
+
+        if (files.length > 0) {
+          Array.from(files).forEach((file) => {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const imgElement = document.createElement("img");
+              imgElement.src = e.target.result;
+              imgElement.classList.add("w-[100%]", "h-[100%]", "max-h-[250px]", "max-w-[250px]", "rounded-lg");
+              previewContainer.appendChild(imgElement);
+            };
+            reader.readAsDataURL(file);
+          });
+        }
+      });
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async function () {
+        const dateInput = document.querySelector('input[name="date"]');
+        const timeInput = document.querySelector('select[name="time"]');
+        
+        async function fetchUnavailableDatesAndBookings(selectedDate) {
+            try {
+                const unavailableDatesResponse = await fetch('/ark/client/unavailable-dates');
+                const bookingsResponse = await fetch(`/ark/client/bookings?date=${selectedDate}`);
+                
+                if (!unavailableDatesResponse.ok || !bookingsResponse.ok) 
+                    throw new Error("Network response was not ok");
+
+                const unavailableDates = await unavailableDatesResponse.json();
+                const bookings = await bookingsResponse.json();
+
+                return { unavailableDates, bookings };
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                return { unavailableDates: [], bookings: [] };
+            }
+        }
+
+        dateInput.addEventListener("input", async function () {
+            const selectedDate = dateInput.value;
+            const { unavailableDates, bookings } = await fetchUnavailableDatesAndBookings(selectedDate);
+
+            const unavailableTimes = unavailableDates.find(dateObj => dateObj.date === selectedDate)?.timeSlots || [];
+            const bookedTimes = bookings.map(booking => booking.time);
+            const allUnavailableTimes = [...new Set([...unavailableTimes, ...bookedTimes])];
+
+            Array.from(timeInput.options).forEach(option => {
+                if (allUnavailableTimes.includes(option.value)) {
+                    option.disabled = true;
+                    option.textContent = `${option.value} - Time Not Available`;
+                } else {
+                    option.disabled = false;
+                    option.textContent = option.value;
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

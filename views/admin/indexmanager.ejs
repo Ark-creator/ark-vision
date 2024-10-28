@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page Management</title>
+    <link rel="icon" href="/assets/img/arklogo.png">
+    <script src="https://kit.fontawesome.com/aed89df169.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            color: white;
+        }
+
+        body {
+            background-color: #121212;
+            margin: 0 auto;
+            padding: 0;
+            display: flex;
+            transition: margin-left 0.3s;
+        }
+
+        #sidebar {
+            background-color: #262626;
+            transition: transform 0.3s ease;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .sidebar-hidden {
+            transform: translateX(-100%);
+        }
+
+        .content {
+            flex: 1;
+            transition: margin-left 0.3s;
+            margin-left: 16rem;
+        }
+
+        .sidebar-hidden-content {
+            margin-left: 0;
+        }
+
+        .card {
+            background-color: #1F1F1F;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        img {
+            border-radius: 8px;
+        }
+
+        form {
+            margin-bottom: 1rem;
+        }
+        #sidebar{
+            position: fixed;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="w-65 h-screen bg-gray-800 text-white flex flex-col justify-between">
+        <div>
+            <div class="p-2 flex flex-col items-center justify-center border-b-[3px] border-[#F6DE03]  relative">
+                <p class="flex items-center uppercase text-[#F6DE03] font-semibold"><img
+                        src="/assets/img/arkvisionlogo.png" alt="" class="w-[80px] -mr-3">Ark Visions</p>
+                <p class="text-[10px] absolute right-12 bottom-3">See the difference</p>
+                <!-- <h1 class="text-2xl font-bold text-[#F6DE03] text-[1.7em]">Ark Vision</h1> -->
+            </div>
+            <nav class="">
+                <a href="/ark/admin" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                    <i class="fa-solid fa-house mr-4"></i> Dashboard
+                </a>
+                <a href="/ark/admin/clients" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                    <i class="fa-solid fa-users mr-4"></i> Clients
+                </a>
+                <a href="/ark/admin/bookings"
+                    class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                    <i class="fa-solid fa-calendar-days mr-4"></i> Bookings
+                </a>
+                <a href="/ark/admin/indexmanager"
+                    class="block py-4 px-5 rounded transition duration-200 text-gray-800 bg-gradient-to-r from-[#F6DE03] to-[#dbe043]">
+                    <i class="fa-solid fa-images mr-4 text-gray-800"></i> Index Manager
+                    <a href="/ark/admin/photo-management"
+                        class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                        <i class="fa-solid fa-image mr-4"></i> Photo Management
+                    </a>
+                    <a href="/ark/admin/resource"
+                        class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                        <i class="fa-solid fa-box mr-4"></i> Resource Control Center
+                    </a>
+                    <a href="/ark/admin/feedback"
+                        class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700 ">
+                        <i class="fa-solid fa-message mr-4"></i> Feedback
+                    </a>
+                    
+                    <a href="/ark/admin/documentation" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700">
+                        <i class="fa fa-file-text mr-4"></i> Documentation
+                      </a>
+                      <a href="/ark/admin/manage-unavailable-dates" class="block py-4 px-5 rounded transition duration-200 hover:bg-gray-700"><i class="fa-solid fa-calendar-times mr-4 "></i> Manage Unavailable Dates</a>
+
+                      
+            </nav>
+        </div>
+        <div>
+            <a href="/ark/admin/logout" class="block py-4 px-5 rounded transition duration-200 hover:bg-red-600">
+                <i class="fa-solid fa-sign-out-alt mr-2"></i> Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="content">
+        <button id="toggleSidebar" class="p-4 text-yellow-500 ml-6">
+            <i class="fa-solid fa-bars fa-2xl"></i>
+        </button>
+
+
+        <div class="p-5">
+            <h1 class="text-[23px] uppercase text-[#F6DE03] font-semibold ml-6">Manage Photos for Landing Page</h1>
+
+
+            <!-- Add Photo Form -->
+            <form action="indexmanager/add" method="POST" enctype="multipart/form-data" class="flex flex-col gap-3 w-1/2 p-5 rounded-[20px] mt-3 ml-6 bg-gray-800" style="box-shadow: 0 0 5px rgba(255, 255, 255, 0.393);">
+                <input type="text" name="title" placeholder="Title (optional)" class="border-b-[2px] border-[#Fde043] p-1  outline-none bg-transparent text-white">
+                <input type="hidden" name="isIndexPhoto" value="true">
+                <input type="file" name="image" class="border-b-[2px] border-[#Fde043]  p-2 rounded-[10px] outline-none " required> <!-- Changed to file input -->
+                <button type="submit" class="bg-blue-500 text-white p-[5px] rounded-[15px] uppercase w-fit px-5 hover:bg-blue-400">Submit</button>
+            </form>
+
+            <!-- Display Existing Photos -->
+            <div class="mt-10 ml-6" >
+                <h2 class="text-[23px] text-[#F6DE03] ">Current Photos</h2>
+                <div class="grid grid-cols-6 gap-4 ">
+                    <% photos.forEach(function(photo) { %>
+                        <div class=" p-4 bg-gray-800 rounded-lg">
+                            <% let decompose=photo.image_path.split("/"); %>
+                                <img src="/<%= `${decompose[1]}/${decompose[2]}` %>" alt="<%= photo.title %>"
+                                    class="w-full h-auto mb-4">
+                                <p>
+                                    <%= photo.title %>
+                                </p>
+
+                                <!-- Delete Button -->
+                                <form action="indexmanager/delete" method="POST">
+                                    <input type="hidden" name="id" value="<%= photo._id %>">
+                                    <button type="submit" class="bg-red-500 text-white p-2 hover:bg-red-600">Delete</button>
+                                </form>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+</body>
+<script>
+      // Sidebar toggle functionality
+      const sidebar = document.getElementById('sidebar');
+        const toggleButton = document.getElementById('toggleSidebar');
+        const content = document.querySelector('.content');
+
+        toggleButton.addEventListener('click', () => {
+            sidebar.classList.toggle('sidebar-hidden');
+            content.classList.toggle('sidebar-hidden-content');
+        });
+</script>
+</html>
