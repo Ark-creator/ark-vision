@@ -10,7 +10,7 @@
     "seed:packages": "node ./devTools/seeders/packageseeder.js",
     "seed:services": "node ./devTools/seeders/serviceseeder.js",
     "seed:tables": "npm-run-all seed:addons seed:services seed:packages",
-    "fresh": "node ./devTools/freshMigrate.js"
+    "fresh": "node ./devTools/freshMigrate.js",
     "start": "node server.js"
   },
   "keywords": [],
